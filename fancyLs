@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#To use this, copy it into your .bashrc and either source .bashrc or restart the terminal.
+
+#This thing is probably not elegant and it only functions because I tell it to forget the fact that the bash part of it is getting a bunch of errors I don't understand. But it functions.
+
+#There's a slight problem that I can't figure out, in that it seperates filenames that contain a whitespace into 2 columns... idk why. I'm still working on a fix for that. Bare with me.
+
+#If you don't like tha colors: -vCO is the directory color, -vC1 is the normal color and -vC2 is the color of executable files and symlinks. Codes are easy to find online. If you don't know how to change them, you honestly shouldn't be playing with your .bashrc!
+
+#Good Luck!
+printPretty() 
+{ 
+    stat -c$'%F\n%n' * | awk -vC0='\033[1;34m' -vC1='\033[1;37m' -vC2='\033[1;32m' '/^directory/ {getline LEFT[++DC]; next} {getline RIGHT[++FC]} {for (i=1; i<=FC; i++) {if (system("[ -x " RIGHT[i] " ]") == 0) RIGHT[i]=C2 RIGHT[i]}} END {for (i=1; i<=(DC>FC?DC:FC); i++) print C0 LEFT[i], C1 RIGHT[i]}'| column -nt
+}
+
+alias l="printPretty 2>/dev/null" #<-- sneaky ignore errors command here!
