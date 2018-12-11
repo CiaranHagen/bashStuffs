@@ -1,0 +1,25 @@
+#!/bin/sh
+
+#This is a fancy RAAAAAAAAAAAIIIIIIIIIIINNNNNNNNNNNNBOOOOOOOOOOOW prompt. (Sorry got out of control there.)
+
+#To use it, replace all occurrences of PS1 with the last line (PS1="$PERSPS"), in .bashrc.
+
+#The function and it's call (which is mandatory) have to be put into .bashrc too, but you are free to pick and choose where as long as it's before the first PS1. In the function, insert your own preferred name into the place where it currently says 'gingerbread'.
+
+#And TADA! you're all set!
+
+fancyName() 
+{
+    PERSPS='';
+    NAME='gingerbread';
+    LENGTHNAME=${#NAME};
+    for i in `seq 1 $LENGTHNAME`;
+        do
+            NUM=$((($i % 8) + 30));
+            PERSPS="$PERSPS\[\033[01;$NUM";
+            PERSPS+="m\]${NAME:$i-1:1}";
+        done
+    PERSPS="$PERSPS\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$\] ";
+}
+fancyName
+PS1="$PERSPS"
