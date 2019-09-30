@@ -9,7 +9,24 @@
 #Good Luck!
 printPretty() 
 { 
-    stat -c$'%F\n%n' * | awk -vC0='\033[1;34m' -vC1='\033[1;37m' -vC2='\033[1;32m' -vC3='\033[1;36m' '/^directory/ {getline LEFT[++DC]; next} {getline RIGHT[++FC]} {for (i=1; i<=FC; i++) {if (system("[ -h " RIGHT[i] " ]") == 0) RIGHT[i]=C3 RIGHT[i]; if (system("[ -x " RIGHT[i] " ]") == 0) RIGHT[i]=C2 RIGHT[i]}} END {for (i=1; i<=(DC>FC?DC:FC); i++) printf "%-50s%s\n", C0 LEFT[i], C1 RIGHT[i]}'
+    stat -c$'%F\n%n' * | \
+    awk -vC0='\033[34m\033[1m' \
+        -vC1='\033[0m' \
+        -vC2='\033[32m\033[1m' \
+        -vC3='\033[36m\033[1m' \
+        '/^directory/ \
+        {getline LEFT[++DC]; next} \
+        {getline RIGHT[++FC]} \
+        {for (i=1; i<=FC; i++) \
+            {if (system("[ -h \"" RIGHT[i] "\" ]") == 0) \
+                RIGHT[i]=C3 RIGHT[i]; \
+            if (system("[ -x \"" RIGHT[i] "\" ]") == 0) \
+                RIGHT[i]=C2 RIGHT[i]\
+            }\
+        } END \
+        {for (i=1; i<=(DC>FC?DC:FC); i++) \
+            printf "%-50s%s\n", C0 LEFT[i], C1 RIGHT[i]\
+        }'
 }
 
-alias l="printPretty 2>/dev/null" #<-- sneaky ignore errors command here!
+alias l='printPretty'
