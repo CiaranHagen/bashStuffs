@@ -2,9 +2,9 @@
 
 #To use this, copy it into your .bashrc and either source .bashrc or restart the terminal.
 
-#This thing is probably not elegant and it only functions because I tell it to forget the fact that the bash part of it is getting a bunch of errors I don't understand. But it functions.
+#This thing is probably not elegant, but it functions.
 
-#If you don't like tha colors: -vCO is the directory color, -vC1 is the normal color, -vC2 is the color of executable files and -vC3 is the color of symlinks. Codes are easy to find online. If you don't know how to change them, you honestly shouldn't be playing with your .bashrc!
+#If you don't like the colors: -vCO is the directory color, -vC1 is the normal color, -vC2 is the color of executable files and -vC3 is the color of symlinks. Codes are easy to find online. If you don't know how to change them, you honestly shouldn't be playing with your .bashrc!
 
 #Good Luck!
 printPretty() 
