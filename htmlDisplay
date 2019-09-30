@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#This is a long thing simply to create an alias command for pandoc. 
+#It converts a markdown (.md) document into html format and displays it.
+
+#Since this is just to display the document, the script removes it after, 
+#but this could be removed if wanted.
+
+#The dev/null/ output change is just because firefox is a whiny little *%$@ and 
+#sometimes throws random warnings that are annoying when they pile up in the 
+#terminal. So I ignore them.
+
+htmlFunc ()
+{
+pandoc -f markdown -t html $1 > /home/user/Desktop/r.html
+wait
+firefox /home/user/Desktop/r.html;
+wait
+sleep 5
+rm /home/user/Desktop/r.html;
+}
+
+alias html='htmlFunc 2>/dev/null'
